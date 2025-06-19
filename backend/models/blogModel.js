@@ -1,21 +1,15 @@
 const db = require('../config/db');
 
 const Blog = {
-  getAll: (callback) => {
-    db.query('SELECT * FROM posts', callback);
+  getAll: (cb) => {
+    db.query('SELECT * FROM posts ORDER BY created_at DESC', cb);
   },
-  getById: (id, callback) => {
-    db.query('SELECT * FROM posts WHERE id = ?', [id], callback);
+  getById: (id, cb) => {
+    db.query('SELECT * FROM posts WHERE id = ?', [id], cb);
   },
-  create: (data, callback) => {
-    db.query('INSERT INTO posts SET ?', data, callback);
+  delete: (id, cb) => {
+    db.query('DELETE FROM posts WHERE id = ?', [id], cb);
   },
-  update: (id, data, callback) => {
-    db.query('UPDATE posts SET ? WHERE id = ?', [data, id], callback);
-  },
-  delete: (id, callback) => {
-    db.query('DELETE FROM posts WHERE id = ?', [id], callback);
-  }
 };
 
 module.exports = Blog;
